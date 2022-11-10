@@ -484,7 +484,7 @@ insert into flights_ice
 select month, dayofmonth, dayofweek, deptime, crsdeptime, arrtime, crsarrtime,  
 uniquecarrier, flightnum, tailnum, actualelapsedtime, crselapsedtime, airtime, arrdelay, depdelay,  
 origin, dest, distance, taxiin, taxiout, cancelled, cancellationcode, diverted, carrierdelay, weatherdelay, 
-nasdelay, securitydelay, lateaircraftdelay, 2022 
+nasdelay, securitydelay, lateaircraftdelay, 2022 as year
 from flights_orc where year = 1995; 
 ```
 Now lets see the impact what the differnece is, lets run two queries and note the complete time:
