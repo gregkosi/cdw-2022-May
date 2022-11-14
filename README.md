@@ -162,7 +162,7 @@ WHERE planes_csv.tailnum IN
        (SELECT tailnum,
                count(*),
                avg(depdelay) AS avg_delay,
-               max(depdelay),
+               max(depdelay) as maxdepdelay,
                avg(taxiout),
                avg(cancelled),
                avg(weatherdelay),
@@ -177,12 +177,10 @@ WHERE planes_csv.tailnum IN
                avg(actualelapsedtime),
                avg(distance)
         FROM flights_csv
-        WHERE tailnum IN ('N194JB',
-                          'N906S',
-                          'N575ML',
-                          'N852NW',
-                          'N000AA')
-        GROUP BY tailnum) AS delays);
+        WHERE depdelay IS NOT NULL
+        GROUP BY tailnum
+        ORDER BY maxdepdelay DESC
+        LIMIT 1) AS delays);
 
 ```
 NOTE: If this returns no results, then remove the 'WHERE tailnum in …' clause
@@ -192,7 +190,7 @@ Results
 
 |MODEL	|ENGINE_TYPE|
 | :- | :- |
-|A330-223	|Turbo-Fan| 
+|A320-211	|Turbo-Jet| 
 
 -----
 ## Lab 3 - Managed Tables
